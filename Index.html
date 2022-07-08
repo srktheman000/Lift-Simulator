@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <div class="input-form">
+      <div class="input-container">
+        Enter no of Lift :
+        <input type="number" min="0" class="lift-num-input" />
+      </div>
+      <div class="input-container">
+        Enter no of Floor :
+        <input
+          type="number"
+          min="0"
+          class="floor-num-input"
+          onclick="generator()"
+        />
+      </div>
+      <button type="submit" onclick="generator()" class="submit-button-input">
+        Create Simulation
+      </button>
+      <div class="main"></div>
+    </div>
+    <!-- <div class="mydiv">
+      <div class="mylift"></div>
+    </div> -->
+
+    <!-- <button onclick="createfloor()">addfloor</button>
+    <button onclick="createlift()">addlift</button>
+    <div class="main">
+      <div class="floorcontainer">
+        <div class="button">
+          <button class="btn" onclick="moveup()">Up</button>
+          <button class="btn" onclick="movedown()">Down</button>
+        </div>
+        <div class="floor-wrap">
+          <div class="floor-top"></div>
+          <div class="floor"></div>
+        </div>
+      </div>
+      <div class="floorcontainer">
+        <div class="button">
+          <button class="btn" onclick="moveup()">Up</button>
+          <button class="btn" onclick="movedown()">Down</button>
+        </div>
+        <div class="floor-wrap">
+          <div class="floor-top"></div>
+          <div class="floor"></div>
+        </div>
+      </div>
+      <div class="floorcontainer">
+        <div class="button">
+          <button class="btn" onclick="moveup()">Up</button>
+          <button class="btn" onclick="movedown()">Down</button>
+        </div>
+        <div class="floor-wrap">
+          <div class="floor-top">
+            <div class="lift"></div>
+          </div>
+          <div class="floor"></div>
+        </div>
+      </div>
+    </div> -->
+
+    <script src="script2.js"></script>
+  </body>
+</html>
