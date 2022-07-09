@@ -11,62 +11,26 @@
     <div class="input-form">
       <div class="input-container">
         Enter no of Lift :
-        <input type="number" min="0" class="lift-num-input" />
+        <input type="number" min="0" class="lift-num-input getinput" />
       </div>
       <div class="input-container">
         Enter no of Floor :
         <input
           type="number"
           min="0"
-          class="floor-num-input"
+          class="floor-num-input getinput"
           onclick="generator()"
         />
       </div>
       <button type="submit" onclick="generator()" class="submit-button-input">
         Create Simulation
       </button>
-      <div class="main"></div>
     </div>
-    <!-- <div class="mydiv">
-      <div class="mylift"></div>
-    </div> -->
+    <div class="liftbox"></div>
 
-    <!-- <button onclick="createfloor()">addfloor</button>
-    <button onclick="createlift()">addlift</button>
-    <div class="main">
-      <div class="floorcontainer">
-        <div class="button">
-          <button class="btn" onclick="moveup()">Up</button>
-          <button class="btn" onclick="movedown()">Down</button>
-        </div>
-        <div class="floor-wrap">
-          <div class="floor-top"></div>
-          <div class="floor"></div>
-        </div>
-      </div>
-      <div class="floorcontainer">
-        <div class="button">
-          <button class="btn" onclick="moveup()">Up</button>
-          <button class="btn" onclick="movedown()">Down</button>
-        </div>
-        <div class="floor-wrap">
-          <div class="floor-top"></div>
-          <div class="floor"></div>
-        </div>
-      </div>
-      <div class="floorcontainer">
-        <div class="button">
-          <button class="btn" onclick="moveup()">Up</button>
-          <button class="btn" onclick="movedown()">Down</button>
-        </div>
-        <div class="floor-wrap">
-          <div class="floor-top">
-            <div class="lift"></div>
-          </div>
-          <div class="floor"></div>
-        </div>
-      </div>
-    </div> -->
+    <div class="main"></div>
+
+    <footer></footer>
 
     <script src="script2.js"></script>
   </body>

@@ -4,6 +4,48 @@
     box-sizing: border-box;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.input-form {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(253, 95, 38);
+    height: 50px;
+
+}
+
+.getinput {
+    border: none;
+    outline: none;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+.input-container {
+    margin: 5px;
+    padding: 2px;
+}
+
+.submit-button-input {
+    padding: 7px;
+    background-color: rgb(237, 181, 15);
+    border-radius: 5px;
+}
+
 .main {
     margin: 10px;
     position: relative;
@@ -19,17 +61,28 @@
 .floor {
     width: 100%;
     height: 2px;
-    align-self: end;
+    justify-self: end;
     background-color: rgb(14, 13, 13);
+    margin-left: 25px;
 }
 
 .button {
-    align-self: safe center;
+    align-self: center;
     width: 50px;
 }
 
 .btn {
-    margin: 5px;
+    margin: 2px;
+    padding: 2px;
+    width: 60px;
+}
+
+.up-button {
+    background-color: rgb(95, 232, 95);
+}
+
+.down-button {
+    background-color: rgb(233, 102, 102);
 }
 
 .floor-wrap {
@@ -37,6 +90,7 @@
     flex-direction: column;
     height: 100px;
     width: 100%;
+    margin-right: 10px;
 
 }
 
@@ -54,19 +108,29 @@
     background-color: red;
     margin: 5px;
     margin-bottom: 5px;
+    border: 5px solid black;
     position: absolute;
     transition: top 2s;
+    transition: width 2s;
+    transition-timing-function: linear;
     bottom: 1px;
 
 }
 
-.lift2 {
-    width: 50px;
-    height: 90px;
-    background-color: red;
-    margin: 5px;
-    margin-bottom: 5px;
-    position: absolute;
-    transition: top 2s;
-    left: 100px
+/* .liftbox {
+    width: 80px;
+    height: 100px;
+    background-color: rebeccapurple;
+    margin: 20px;
+    transition: width 2s;
+    
 }
+.show{
+    width: 200px;
+    transition-property: width;
+}
+
+.hide{
+    width: 10px;
+    transition-property: width;
+} */

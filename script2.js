@@ -3,10 +3,25 @@ const liftnum = document.querySelector(".lift-num-input");
 const floornum = document.querySelector(".floor-num-input");
 let liftval = parseInt(liftnum.value);
 let floorval = parseInt(floornum.value);
+const liftbox = document.getElementsByClassName("liftbox");
+console.log(liftbox);
+liftbox[0].addEventListener("click", myFunction);
+function myFunction() {
+  liftbox[0].style.width = 300 + "px";
+  liftbox[0].style.transitionTimingFunction = "ease-in-out";
+  setTimeout(() => {
+    liftbox[0].style.width = 20 + "px";
+    liftbox[0].style.transitionTimingFunction = "ease-in-out";
+  }, 1000);
+  setTimeout(() => {
+    liftbox[0].style.width = 300 + "px";
+    liftbox[0].style.transitionTimingFunction = "ease-in-out";
+  }, 2000);
+}
 
 function generator() {
+  console.log(liftval, floorval);
   let l = new Array(liftval).fill(0);
-  // let l = [0, 0];
   var floorarray = [];
   for (let i = 0; i < floorval; i++) {
     floorarray[i] = i;
@@ -15,10 +30,6 @@ function generator() {
   for (let i = 0; i < liftval; i++) {
     createlift(i);
   }
-  // var liftdiv = document.createElement("div");
-  // liftdiv.classList.add("lift");
-  // main.lastChild.children[1].children[0].appendChild(liftdiv);
-  // console.log(main.lastChild);
 }
 
 function createfloor(i, l) {
@@ -44,6 +55,7 @@ function createfloor(i, l) {
   floorwrapdiv.appendChild(floordiv);
 
   let upbutton = document.createElement("button");
+  upbutton.classList.add("up-button");
   upbutton.innerHTML = "Up";
   upbutton?.setAttribute("id", `u${i}`);
   upbutton.addEventListener("click", function (e) {
@@ -53,6 +65,7 @@ function createfloor(i, l) {
   buttondiv.appendChild(upbutton);
 
   let downbutton = document.createElement("button");
+  downbutton.classList.add("down-button");
   downbutton.innerHTML = "Down";
   downbutton?.setAttribute("id", `d${i}`);
   downbutton.addEventListener("click", function (e) {
@@ -65,21 +78,32 @@ function createfloor(i, l) {
 function createlift(i) {
   var liftdiv = document.createElement("div");
   liftdiv.classList.add("lift");
-  liftdiv.style.left = `${i * 100 + 50}px`;
+  liftdiv.style.left = `${i * 100 + 100}px`;
   main.lastChild.children[1].children[0].appendChild(liftdiv);
 }
 
 function moveup(e, id, l) {
   let fnum = Math.abs(floorval - 1 - parseInt(id[1]));
+
   for (let i = 0; i < l.length; i++) {
     if (l[i] < fnum) {
       let liftmove = main.lastChild.children[1].children[0].children[i];
       l[i] = fnum;
-      liftmove.style.top = (floorval - l[i] - 1) * 100 + "px";
+      liftmove.style.width = 0 + "px";
+      liftmove.style.transitionTimingFunction = "ease-in-out";
+      setTimeout(() => {
+        liftmove.style.width = 50 + "px";
+        liftmove.style.width = 300 + "px";
+        liftmove.style.transitionTimingFunction = "ease-in-out";
+      }, 1000);
+      setTimeout(() => {
+        liftmove.style.transitionTimingFunction = "linear";
+        liftmove.style.top = (floorval - l[i] - 1) * 100 + "px";
+      }, 2000);
+
       break;
     }
   }
-
   console.log(fnum, l, "up", id);
 }
 
