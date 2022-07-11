@@ -1,33 +1,24 @@
 const main = document.querySelector(".main");
-const liftnum = document.querySelector(".lift-num-input");
-const floornum = document.querySelector(".floor-num-input");
-let liftval = parseInt(liftnum.value);
-let floorval = parseInt(floornum.value);
-const liftbox = document.getElementsByClassName("liftbox");
-console.log(liftbox);
-liftbox[0].addEventListener("click", myFunction);
-function myFunction() {
-  liftbox[0].style.width = 300 + "px";
-  liftbox[0].style.transitionTimingFunction = "ease-in-out";
-  setTimeout(() => {
-    liftbox[0].style.width = 20 + "px";
-    liftbox[0].style.transitionTimingFunction = "ease-in-out";
-  }, 1000);
-  setTimeout(() => {
-    liftbox[0].style.width = 300 + "px";
-    liftbox[0].style.transitionTimingFunction = "ease-in-out";
-  }, 2000);
-}
 
 function generator() {
-  console.log(liftval, floorval);
-  let l = new Array(liftval).fill(0);
+  main.innerHTML = "";
+  const liftnum = document.querySelector(".lift-num-input");
+  const floornum = document.querySelector(".floor-num-input");
+  let liftval = parseInt(liftnum.value);
+  let floorval = parseInt(floornum.value);
+  let l = [];
   var floorarray = [];
-  for (let i = 0; i < floorval; i++) {
+  for (let i = floorval; i > 0; i--) {
     floorarray[i] = i;
     createfloor(i, l);
   }
   for (let i = 0; i < liftval; i++) {
+    let obj = {
+      liftnum: i + 1,
+      current: 0,
+      busy: false,
+    };
+    l.push(obj);
     createlift(i);
   }
 }
@@ -59,7 +50,7 @@ function createfloor(i, l) {
   upbutton.innerHTML = "Up";
   upbutton?.setAttribute("id", `u${i}`);
   upbutton.addEventListener("click", function (e) {
-    moveup(e, this.id, l);
+    moveup(this.id, l);
   });
   upbutton.classList.add("btn");
   buttondiv.appendChild(upbutton);
@@ -69,7 +60,7 @@ function createfloor(i, l) {
   downbutton.innerHTML = "Down";
   downbutton?.setAttribute("id", `d${i}`);
   downbutton.addEventListener("click", function (e) {
-    movedown(e, this.id, l);
+    movedown(this.id, l);
   });
   downbutton.classList.add("btn");
   buttondiv.appendChild(downbutton);
@@ -79,44 +70,78 @@ function createlift(i) {
   var liftdiv = document.createElement("div");
   liftdiv.classList.add("lift");
   liftdiv.style.left = `${i * 100 + 100}px`;
+
+  const liftrightdoor = document.createElement("div");
+  const liftleftdoor = document.createElement("div");
+
+  liftrightdoor.classList.add("lift-right-door");
+  liftleftdoor.classList.add("lift-left-door");
+
+  liftdiv.appendChild(liftrightdoor);
+  liftdiv.appendChild(liftleftdoor);
   main.lastChild.children[1].children[0].appendChild(liftdiv);
 }
 
-function moveup(e, id, l) {
-  let fnum = Math.abs(floorval - 1 - parseInt(id[1]));
-
-  for (let i = 0; i < l.length; i++) {
-    if (l[i] < fnum) {
-      let liftmove = main.lastChild.children[1].children[0].children[i];
-      l[i] = fnum;
-      liftmove.style.width = 0 + "px";
-      liftmove.style.transitionTimingFunction = "ease-in-out";
-      setTimeout(() => {
-        liftmove.style.width = 50 + "px";
-        liftmove.style.width = 300 + "px";
-        liftmove.style.transitionTimingFunction = "ease-in-out";
-      }, 1000);
-      setTimeout(() => {
-        liftmove.style.transitionTimingFunction = "linear";
-        liftmove.style.top = (floorval - l[i] - 1) * 100 + "px";
-      }, 2000);
-
-      break;
-    }
-  }
-  console.log(fnum, l, "up", id);
+function liftfunction(liftmove, l) {
+  let liftleftdoor = liftmove.children[1];
+  let liftrightdoor = liftmove.children[0];
+  liftleftdoor.style.width = 0 + "px";
+  liftrightdoor.style.width = 0 + "px";
+  liftrightdoor.style.left = "100%";
+  liftrightdoor.style.transform = "translateX(-100%)";
+  setTimeout(() => {
+    liftleftdoor.style.width = 25 + "px";
+    liftrightdoor.style.width = 25 + "px";
+    console.log(l.busy);
+    l.busy = false;
+  }, 2000);
 }
 
-function movedown(e, id, l) {
-  let fnum = floorval - 1 - parseInt(id[1]);
+function moveup(id, l) {
+  let fnum = Math.abs(parseInt(id[1]));
   for (let i = 0; i < l.length; i++) {
-    if (l[i] > fnum) {
-      let liftmove = main.lastChild.children[1].children[0].children[i];
-      l[i] = fnum;
-      liftmove.style.top = (floorval - l[i] - 1) * 100 + "px";
+    let liftmove = main.lastChild.children[1].children[0].children[i];
+    if (l[i].current == fnum && l[i].busy == false) {
+      l[i].busy = true;
+      setTimeout(() => {
+        liftfunction(liftmove, l[i]);
+      }, 2000);
+      break;
+    }
+    if (l[i].current < fnum && l[i].busy == false) {
+      l[i].current = fnum;
+      l[i].busy = true;
+      liftmove.style.transitionDuration = `${l[i].current}s`;
+      liftmove.style.bottom = (l[i].current - 1) * 100 + "px";
+      setTimeout(() => {
+        liftfunction(liftmove, l[i]);
+      }, 2000 * (l[i].current - 1));
+      console.log(l);
       break;
     }
   }
+}
 
-  console.log(fnum, l, "down", id);
+function movedown(id, l) {
+  let fnum = parseInt(id[1]);
+  for (let i = 0; i < l.length; i++) {
+    let liftmove = main.lastChild.children[1].children[0].children[i];
+    if (l[i].current == fnum && l[i].busy == false) {
+      l[i].busy = true;
+      setTimeout(() => {
+        liftfunction(liftmove, l[i]);
+      }, 2000);
+      break;
+    }
+    if (l[i].current > fnum && l[i].busy == false) {
+      l[i].current = fnum;
+      l[i].busy = true;
+      liftmove.style.transitionDuration = `${l[i].current}s`;
+      liftmove.style.bottom = Math.abs(l[i].current - 1) * 100 + "px";
+      setTimeout(() => {
+        liftfunction(liftmove, l[i]);
+      }, 2000 * l[i].current);
+      break;
+    }
+  }
 }

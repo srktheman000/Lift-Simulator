@@ -101,6 +101,53 @@ input[type=number] {
     flex-direction: row;
 }
 
+
+.lift {
+    position: absolute;
+    width: 50px;
+    height: 90px;
+    background-color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    margin-bottom: 5px;
+    bottom: 0px;
+    transition: bottom 2s;
+    transition-timing-function: linear;
+}
+
+.lift-left-door {
+    position: absolute;
+    border-right: 2px solid black;
+    width: 25px;
+    height: 87px;
+    background-color: red;
+    transition: width 2s;
+    transition-timing-function: linear;
+}
+
+
+.lift-right-door {
+    position: absolute;
+    border-left: 2px solid black;
+    left: 50%;
+    width: 25px;
+    height: 87px;
+    background-color: red;
+    transition: width 2s;
+    transition-timing-function: linear;
+    transform: scaleX(-100%);
+}
+
+
+
+
+
+
+
+/* 
 .lift {
 
     width: 50px;
@@ -115,22 +162,4 @@ input[type=number] {
     transition-timing-function: linear;
     bottom: 1px;
 
-}
-
-/* .liftbox {
-    width: 80px;
-    height: 100px;
-    background-color: rebeccapurple;
-    margin: 20px;
-    transition: width 2s;
-    
-}
-.show{
-    width: 200px;
-    transition-property: width;
-}
-
-.hide{
-    width: 10px;
-    transition-property: width;
 } */
